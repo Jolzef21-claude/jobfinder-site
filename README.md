@@ -5,29 +5,18 @@ and nothing else, which is the right amount of machinery for a landing page.
 
 ## What it is right now
 
-**A waiting list, not a download page.** That is deliberate.
-
-The app currently needs each user to supply their own Anthropic API key, because
-the relay that holds the key server-side is not live yet. A public download today
-would hand strangers something that does not work and cannot be paid for, and
-every one of them would email you about it.
-
-So the page collects addresses instead. When the closed beta opens, the download
+**A waiting list.** Job Finder opens to a small group first, so the page collects
+addresses rather than serving a download. When the beta opens, the download
 button replaces the email box — the rest of the page does not change.
 
-## Before it goes live
+## To do
 
-Three things, all small:
-
-1. **The form does nothing yet.** Create a free form (Tally, Formspree, Brevo)
-   and paste its address into the `action="#"` on the `<form>` in `index.html`.
-   It is marked with a comment. That is the only line that needs changing.
-2. **The footer links point at pages that do not exist.** The four French legal
-   documents already exist in the app at `templates/legal.html` — they need
-   copying out to `mentions-legales.html`, `confidentialite.html` and `cgv.html`,
-   and the 13 `[À COMPLÉTER]` placeholders filling in.
-3. **`contact@example.fr`** in the footer is a placeholder. French law requires a
-   real contact route on a commercial site.
+1. **Wire up the form.** Create a form (Tally, Formspree, Brevo) and paste its
+   address into the `action="#"` on the `<form>` in `index.html`. It is marked
+   with a comment, and it is the only line that needs changing.
+2. **Add the legal pages** the footer links to: `mentions-legales.html`,
+   `confidentialite.html`, `cgv.html`.
+3. **Set a real contact address** in the footer, in place of the placeholder.
 
 ## Publishing it
 
