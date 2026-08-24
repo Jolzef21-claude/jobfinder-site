@@ -191,6 +191,13 @@ input[type=email]{
 input[type=email]::placeholder{color:#6E6E68}
 input[type=email]:focus{outline:2px solid var(--lime);outline-offset:1px;border-color:transparent}
 .consent{font-size:12.5px;color:#7A7A74;max-width:48ch}
+.consent a{color:#7A7A74;text-decoration:underline}
+.consent a:hover{color:var(--text)}
+
+.form-message{font-size:14.5px;min-height:1.2em;margin:0}
+.form-message.ok{color:var(--lime)}
+.form-message.bad{color:#FF8A80}
+.btn[disabled]{opacity:.6;cursor:progress}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--hairline);padding:32px 0 46px;color:var(--muted);font-size:14px}
@@ -365,19 +372,18 @@ footer{border-top:1px solid var(--hairline);padding:32px 0 46px;color:var(--mute
         <p>Nous ouvrons d'abord à un petit groupe. Laissez votre adresse et vous serez
            parmi les premiers contactés.</p>
 
-        <!-- ▼▼ À REMPLACER ▼▼
-             Créez un formulaire gratuit (Tally, Formspree, Brevo…) et collez son
-             adresse dans action=". Tant que ce n'est pas fait, le formulaire ne
-             fait rien. C'est la seule ligne à changer sur cette page. -->
-        <form action="#" method="POST">
+        <form id="waitlist-form" novalidate>
           <input type="email" name="email" required autocomplete="email"
                  placeholder="votre@email.fr" aria-label="Votre adresse email">
-          <button class="btn btn-primary" type="submit">Me prévenir</button>
+          <button class="btn btn-primary" type="submit" id="waitlist-submit">Me prévenir</button>
         </form>
+
+        <p id="waitlist-message" class="form-message" role="status" aria-live="polite"></p>
 
         <p class="consent">
           Votre adresse ne sert qu'à vous prévenir du lancement. Pas de revente,
           pas de newsletter, désinscription en un clic.
+          <a href="confidentialite.html">Confidentialité</a>.
         </p>
       </div>
     </div>
@@ -396,15 +402,90 @@ footer{border-top:1px solid var(--hairline);padding:32px 0 46px;color:var(--mute
     </p>
     <div class="foot">
       <span>© 2026 Job Finder</span>
+      <!-- No CGV link yet, on purpose: conditions of SALE describe a sale, and
+           nothing is for sale until the beta opens. A page saying "we sell
+           nothing" would be worse than no page. It goes back before the first
+           euro is taken. -->
       <nav>
         <a href="mentions-legales.html">Mentions légales</a>
         <a href="confidentialite.html">Confidentialité</a>
-        <a href="cgv.html">CGV</a>
         <a href="mailto:contact@jobfinderapp.fr">contact@jobfinderapp.fr</a>
       </nav>
     </div>
   </div>
 </footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   ▼ THE ONE LINE TO CHANGE ▼
+
+   Paste the endpoint from your form service here, then push.
+   Formspree gives you one that looks like:
+       https://formspree.io/f/xxxxxxxx
+
+   Until this is filled in, the form tells the visitor honestly that
+   sign-ups are not open yet, rather than pretending to accept an
+   address and silently dropping it.
+   ═══════════════════════════════════════════════════════════════════ */
+const WAITLIST_ENDPOINT = "";
+
+(function () {
+  const form = document.getElementById("waitlist-form");
+  const field = form.querySelector('input[name="email"]');
+  const button = document.getElementById("waitlist-submit");
+  const message = document.getElementById("waitlist-message");
+
+  function say(text, kind) {
+    message.textContent = text;
+    message.className = "form-message" + (kind ? " " + kind : "");
+  }
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const email = field.value.trim();
+    // Checked here as well as by the browser: novalidate gives us a message
+    // in our own voice and in French, rather than the browser's.
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      say("Cette adresse n'a pas l'air valide.", "bad");
+      field.focus();
+      return;
+    }
+
+    if (!WAITLIST_ENDPOINT) {
+      say("Les inscriptions ouvrent très bientôt. Revenez dans quelques jours.", "bad");
+      return;
+    }
+
+    button.disabled = true;
+    const original = button.textContent;
+    button.textContent = "Envoi…";
+    say("");
+
+    try {
+      const response = await fetch(WAITLIST_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ email: email }),
+      });
+
+      if (response.ok) {
+        form.hidden = true;
+        say("C'est noté. Vous serez prévenu dès l'ouverture.", "ok");
+      } else {
+        say("L'envoi a échoué. Réessayez, ou écrivez à contact@jobfinderapp.fr.", "bad");
+      }
+    } catch (e) {
+      // Offline, or the request was blocked. Either way the address is lost,
+      // so give them a route that does not depend on this form working.
+      say("Connexion impossible. Réessayez, ou écrivez à contact@jobfinderapp.fr.", "bad");
+    } finally {
+      button.disabled = false;
+      button.textContent = original;
+    }
+  });
+})();
+</script>
 
 </body>
 </html>

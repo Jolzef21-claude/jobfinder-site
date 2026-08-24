@@ -1,0 +1,89 @@
+/* Shared by the legal pages. index.html keeps its own stylesheet: it has a
+   hero, a pricing grid and a waiting list that none of these pages need, and
+   splitting a working page apart to save a few duplicated colour tokens is a
+   bad trade. Keep the tokens below in sync with index.html if they ever change. */
+
+:root{
+  --lime:#D4FF3F;
+  --ink:#0E0E0E;
+  --bg:#111111;
+  --panel:#181818;
+  --text:#F5F5F0;
+  --muted:#9A9A94;
+  --hairline:#2A2A2A;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16.5px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+header{border-bottom:1px solid var(--hairline)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.brand{
+  display:flex;align-items:center;gap:11px;
+  font-weight:700;letter-spacing:-0.02em;font-size:17px;
+  color:var(--text);text-decoration:none;
+}
+.tile{
+  width:32px;height:32px;border-radius:9px;background:var(--lime);
+  display:grid;place-items:center;flex:0 0 auto;
+}
+.tile svg{width:22px;height:22px;display:block}
+.back{color:var(--muted);text-decoration:none;font-size:14.5px}
+.back:hover{color:var(--text);text-decoration:underline}
+
+main{padding:52px 0 80px}
+
+h1{
+  font-size:clamp(28px,4.5vw,38px);font-weight:700;letter-spacing:-0.02em;
+  line-height:1.15;margin:0 0 8px;text-wrap:balance;
+}
+.updated{color:var(--muted);font-size:14px;margin:0 0 40px}
+
+h2{
+  font-size:20px;font-weight:600;letter-spacing:-0.01em;
+  margin:40px 0 12px;text-wrap:balance;
+}
+
+p{margin:0 0 15px}
+ul{margin:0 0 15px;padding-left:22px}
+li{margin-bottom:8px}
+
+a{color:var(--lime);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+
+strong{font-weight:600}
+
+/* Anything still to be filled in is meant to be impossible to miss. */
+.todo{
+  background:#3A2A00;color:#FFD966;
+  border:1px solid #6B5000;border-radius:4px;
+  padding:1px 7px;font-size:14px;font-weight:600;
+}
+
+.panel{
+  background:var(--panel);border:1px solid var(--hairline);
+  border-radius:12px;padding:20px 22px;margin:0 0 15px;
+}
+.panel p:last-child{margin-bottom:0}
+
+table{border-collapse:collapse;width:100%;font-size:15px;margin:0 0 15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--hairline);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+tr:last-child td{border-bottom:none}
+
+footer{border-top:1px solid var(--hairline);padding:26px 0 44px;color:var(--muted);font-size:14px}
+.foot{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+.foot nav{display:flex;flex-wrap:wrap;gap:16px}
+.foot a{color:var(--muted);text-decoration:none}
+.foot a:hover{color:var(--text);text-decoration:underline}
