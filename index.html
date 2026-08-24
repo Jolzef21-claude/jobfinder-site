@@ -419,15 +419,15 @@ footer{border-top:1px solid var(--hairline);padding:32px 0 46px;color:var(--mute
 /* ═══════════════════════════════════════════════════════════════════
    ▼ THE ONE LINE TO CHANGE ▼
 
-   Paste the endpoint from your form service here, then push.
-   Formspree gives you one that looks like:
-       https://formspree.io/f/xxxxxxxx
+   The Formspree endpoint. Safe to have in a public page — it is a
+   letterbox: anyone can post to it, nobody can read what was posted
+   without signing in to the Formspree account. Not the same kind of
+   thing as an API key, which must never appear here.
 
-   Until this is filled in, the form tells the visitor honestly that
-   sign-ups are not open yet, rather than pretending to accept an
-   address and silently dropping it.
+   Free plan: 50 submissions a month. If a video does well, that is
+   the ceiling you hit first.
    ═══════════════════════════════════════════════════════════════════ */
-const WAITLIST_ENDPOINT = "";
+const WAITLIST_ENDPOINT = "https://formspree.io/f/xljrkzvo";
 
 (function () {
   const form = document.getElementById("waitlist-form");
