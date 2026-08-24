@@ -2,3 +2,11 @@
 .idea/
 Thumbs.db
 desktop.ini
+
+# Secrets. No .env exists here today, and this line is what keeps it
+# that way if one is ever created. The relay repo learned this the easy way.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
