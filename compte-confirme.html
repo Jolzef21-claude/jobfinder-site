@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adresse confirmée — Job Finder</title>
+<meta name="color-scheme" content="dark">
+
+<!-- Not a page anyone should reach from a search result: it is the landing
+     spot for one link in one email, and it says nothing useful out of that
+     context. -->
+<meta name="robots" content="noindex, follow">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/legal.css">
+
+<style>
+  /* This page is one message, so it is centred rather than following the
+     document layout the legal pages use. */
+  main.confirm{max-width:560px;padding-top:64px;padding-bottom:96px;text-align:center}
+  .confirm .mark{
+    width:64px;height:64px;border-radius:18px;background:var(--lime);
+    display:inline-flex;align-items:center;justify-content:center;margin-bottom:28px;
+  }
+  .confirm h1{font-size:1.9rem;line-height:1.25;margin:0 0 14px}
+  .confirm .lead{color:var(--muted);margin:0 0 32px}
+  .steps{
+    text-align:left;background:var(--panel);border:1px solid var(--hairline);
+    border-radius:14px;padding:22px 26px;margin:0 0 28px;
+  }
+  .steps ol{margin:0;padding-left:20px}
+  .steps li{margin:0 0 10px}
+  .steps li:last-child{margin-bottom:0}
+  .aside{color:var(--muted);font-size:0.92rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <span class="tile" aria-hidden="true">
+        <svg viewBox="0 0 32 32">
+          <polygon points="4,4 12,12 4,14" fill="#0E0E0E"/>
+          <polygon points="28,4 20,12 28,14" fill="#0E0E0E"/>
+          <polygon points="16,10 26,26 6,26" fill="#0E0E0E"/>
+          <circle cx="12.5" cy="20" r="1.6" fill="#D4FF3F"/>
+          <circle cx="19.5" cy="20" r="1.6" fill="#D4FF3F"/>
+        </svg>
+      </span>
+      Job Finder
+    </a>
+    <a class="back" href="/">← Retour au site</a>
+  </div>
+</header>
+
+<main class="wrap confirm">
+  <span class="mark" aria-hidden="true">
+    <svg viewBox="0 0 32 32" width="34" height="34">
+      <path d="M7 17 L13 23 L25 10" fill="none" stroke="#0E0E0E"
+            stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+
+  <h1>Votre adresse est confirmée</h1>
+  <p class="lead">Votre compte Job Finder est prêt. Vous pouvez fermer cet onglet.</p>
+
+  <div class="steps">
+    <ol>
+      <li>Revenez dans l’application Job Finder.</li>
+      <li>Ouvrez <strong>Profil</strong>.</li>
+      <li>Saisissez votre adresse et votre mot de passe, puis
+          <strong>Sign in</strong>.</li>
+    </ol>
+  </div>
+
+  <p class="aside">
+    Rien ne se passe ? Vérifiez que Job Finder est bien ouvert sur cet
+    ordinateur. Si vous ne parvenez toujours pas à vous connecter, écrivez à
+    <a href="mailto:contact@jobfinderapp.fr">contact@jobfinderapp.fr</a>.
+  </p>
+</main>
+
+</body>
+</html>
